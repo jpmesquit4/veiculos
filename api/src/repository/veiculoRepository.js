@@ -1,11 +1,11 @@
 import { con } from './connection.js';
 
-export async function inserirVeiculo(modelo, marca, ano, placa) {
+export async function inserirVeiculo(tipo, modelo, marca, ano, placa) {
     const comando = `INSERT INTO tb_veiculo (ds_modelo, ds_marca, ds_ano, ds_placa)
 	                                         VALUES (?, ?, ?, ?)`
 
 
-    const [linhas] = await con.query(comando, [modelo, marca, ano, placa])
+    const [linhas] = await con.query(comando, [tipo, modelo, marca, ano, placa])
     return linhas[0];
 }
 
@@ -13,6 +13,7 @@ export async function buscarTodosVeiculos() {
     const comando =
         `
     select  id_veiculo          id,
+            id_tipoVeiculo      tipo,
             ds_modelo           modelo,
 		    ds_marca            marca,
             ds_ano              ano,
